@@ -10,6 +10,7 @@ import "dotenv/config";
 import session from "express-session";
 import cors from "cors";
 import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz"
 mongoose.connect(CONNECTION_STRING);
 const app = express();
@@ -23,6 +24,9 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET || "kambaz",
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.DATABASE_CONNECTION_STRING,
+  }),
 };
 if (process.env.SERVER_ENV !== "development") {
   sessionOptions.proxy = true;
