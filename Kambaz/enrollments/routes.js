@@ -3,7 +3,7 @@ export default function EnrollmentRoutes(app) {
   const dao = EnrollmentDao();
   const showAllEnrollments = async (req, res) => {
     const userId = req.session?.currentUser?._id;
-    const enrollments = dao.findCoursesForUser(userId);
+    const enrollments = await dao.findCoursesForUser(userId);
     res.json(enrollments);
   }
   const enrollInCourse = async (req, res) => {
