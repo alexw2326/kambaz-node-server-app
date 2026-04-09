@@ -1,7 +1,6 @@
 import express from 'express';
 import Hello from './Hello.js';
 import Lab5 from "./Lab5/index.js";
-import db from "./Kambaz/database/index.js";
 import UserRoutes from "./Kambaz/users/routes.js";
 import CourseRoutes from "./Kambaz/courses/routes.js";
 import ModulesRoutes from './Kambaz/modules/routes.js';
@@ -36,10 +35,10 @@ if (process.env.SERVER_ENV !== "development") {
 app.use(session(sessionOptions));
 app.use(express.json());
 Lab5(app);
-UserRoutes(app, db);
-CourseRoutes(app, db);
-ModulesRoutes(app, db);
-AssignmentRoutes(app, db);
-EnrollmentRoutes(app, db);
+UserRoutes(app);
+CourseRoutes(app);
+ModulesRoutes(app);
+AssignmentRoutes(app);
+EnrollmentRoutes(app);
 Hello(app);
 app.listen(process.env.PORT || 4000);
