@@ -4,17 +4,17 @@ const quizSchema = new mongoose.Schema({
     title: String,
     description: String,
     assignedTo: String,
-    quizType: [{
+    quizType: {
         type: String,
         enum: ["GRADED QUIZ", "PRACTICE QUIZ", "GRADED SURVEY", "UNGRADED SURVEY"],
         default:"GRADED QUIZ",
-    }],
+    },
     points: Number,
-    assignmentGroup: [{
+    assignmentGroup: {
         type: String,
         enum:["QUIZZES", "EXAMS", "ASSIGNMENTS", "PROJECTS"],
         default:"QUIZZES",
-    }],
+    },
     shuffleAnswers: Boolean,
     timeLimit: Number,
     multipleAttempts: Boolean,
@@ -28,8 +28,9 @@ const quizSchema = new mongoose.Schema({
     availableDate: Date,
     untilDate: Date,
     questions: [{
-        type: ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Question"
-    }]
+    }],
+    isPublished: Boolean,
 });
 export default quizSchema;

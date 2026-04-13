@@ -2,8 +2,14 @@ import QuizzesDao from "./dao.js";
 export default function QuizRoutes(app) {
   const dao = QuizzesDao();
   const findAllQuizzes = async (req, res) => {
-    const quizzes = await dao.findAllQuizzes();
-    res.send(quizzes);
+    const { name } = req.query;
+    if (name) {
+        const quizzes = await dao.findQuizByName(name);
+        res.send(quizzes);
+    } else {
+        const quizzes = await dao.findAllQuizzes();
+        res.send(quizzes);
+    }
   }
   const createQuiz = async (req, res) => {
     const currentUser = req.session["currentUser"];
@@ -12,7 +18,6 @@ export default function QuizRoutes(app) {
   };
   const deleteQuiz = async (req, res) => {
     const { quizId } = req.params;
-    await enrollmentsDao.unenrollAllUsersFromCourse(quizId);
     const status = await dao.deleteQuiz(quizId);
     res.send(status);
   }

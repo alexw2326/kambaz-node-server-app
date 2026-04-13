@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
 export default function QuizzesDao() {
   function findAllQuizzes() {
-    return model.find({}, { name: 1, description: 1 });
+    return model.find({});
   }
   function createQuiz(quiz) {
     const newQuiz = { ...quiz, _id: uuidv4() };
@@ -14,9 +14,13 @@ export default function QuizzesDao() {
   function updateQuiz(quizId, quizUpdates) {
     return model.updateOne({ _id: quizId}, { $set: quizUpdates });
   }
+  function findQuizByName(quizName) {
+    return model.find({ title: { $regex: quizName, $options: "i" } });
+  }
   return { findAllQuizzes, 
     createQuiz,
     deleteQuiz,
-    updateQuiz
+    updateQuiz,
+    findQuizByName,
   };
 }
