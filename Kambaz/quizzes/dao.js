@@ -17,10 +17,14 @@ export default function QuizzesDao() {
   function findQuizByName(quizName) {
     return model.find({ title: { $regex: quizName, $options: "i" } });
   }
+  function findQuizById(quizId) {
+    return model.findOne({ _id: quizId });
+ }
   return { findAllQuizzes, 
     createQuiz,
     deleteQuiz,
     updateQuiz,
     findQuizByName,
+    findQuizById,
   };
 }
