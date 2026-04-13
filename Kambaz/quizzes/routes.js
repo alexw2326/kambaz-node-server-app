@@ -3,17 +3,18 @@ export default function QuizRoutes(app) {
   const dao = QuizzesDao();
   const findAllQuizzes = async (req, res) => {
     const { name } = req.query;
+    const { courseId } = req.params;
     if (name) {
         const quizzes = await dao.findQuizByName(name);
         res.send(quizzes);
     } else {
-        const quizzes = await dao.findAllQuizzes();
+        const quizzes = await dao.findAllQuizzes(courseId);
         res.send(quizzes);
     }
   }
   const createQuiz = async (req, res) => {
-    const currentUser = req.session["currentUser"];
-    const newQuiz = await dao.createQuiz(req.body);
+    const { courseId } = req.params;
+    const newQuiz = await dao.createQuiz(req.body, courseId);
     res.json(newQuiz);
   };
   const deleteQuiz = async (req, res) => {

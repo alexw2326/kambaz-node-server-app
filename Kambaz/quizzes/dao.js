@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
 export default function QuizzesDao() {
-  function findAllQuizzes() {
-    return model.find({});
+  function findAllQuizzes(courseId) {
+    return model.find({ course: courseId });
   }
-  function createQuiz(quiz) {
-    const newQuiz = { ...quiz, _id: uuidv4() };
+  function createQuiz(quiz, courseId) {
+    const newQuiz = { ...quiz, _id: uuidv4(), course: courseId };
     return model.create(newQuiz);
   }
   function deleteQuiz(quizId) {

@@ -32,5 +32,6 @@ const quizSchema = new mongoose.Schema({
         ref: "Question"
     }],
     isPublished: Boolean,
+    course: { type: String, ref: "Course" },
 });
 export default quizSchema;
