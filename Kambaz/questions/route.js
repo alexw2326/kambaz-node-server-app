@@ -2,12 +2,13 @@ import QuestionsDao from "./dao.js";
 export default function QuestionsRoutes(app) {
   const dao = QuestionsDao();
   const findAllQuestions = async (req, res) => {
-    const questions = await dao.findAllQuestions();
+    const { quizId } = req.params;
+    const questions = await dao.findAllQuestions(quizId);
     res.send(questions);
   }
   const createQuestion = async (req, res) => {
-    const currentUser = req.session["currentUser"];
-    const newQuestion = await dao.createQuestion(req.body);
+    const { quizId } = req.params;
+    const newQuestion = await dao.createQuestion(req.body, quizId);
     res.json(newQuestion);
   };
   const deleteQuestion = async (req, res) => {

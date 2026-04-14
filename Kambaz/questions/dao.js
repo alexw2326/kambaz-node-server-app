@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
 export default function QuestionsDao() {
-  function findAllQuestions() {
-    return model.find({}, { name: 1, description: 1 });
+  function findAllQuestions(quizId) {
+    return model.find({ quiz: quizId });
   }
-  function createQuestion(question) {
-    const newQuestion = { ...question, _id: uuidv4() };
+  function createQuestion(question, quizId) {
+    const newQuestion = { ...question, _id: uuidv4(), quiz: quizId };
     return model.create(newQuestion);
   }
   function deleteQuestion(questionId) {

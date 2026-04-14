@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 const questionSchema = new mongoose.Schema({
     _id: String,
     quizId: String,
-    text: String,
+    title: String,
+    questionText: String,
     points: Number,
     questionType: {
         type: String,
