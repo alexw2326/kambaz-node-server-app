@@ -27,10 +27,7 @@ const quizSchema = new mongoose.Schema({
     dueDate: Date,
     availableDate: Date,
     untilDate: Date,
-    questions: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Question"
-    }],
+    questions: [String],
     isPublished: Boolean,
     course: { type: String, ref: "Course" },
 });
