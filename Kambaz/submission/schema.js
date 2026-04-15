@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const submissionSchema = new mongoose.Schema({
     _id: String,
     quizId: String,
-    userId: String,
+    userId: {type: String, required: true},
     answers: [{
         questionId: String,
         selectedAnswer: String,
