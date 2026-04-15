@@ -16,14 +16,7 @@ export default function SubmissionRoutes(app) {
     const status = await dao.deleteSubmission(submissionId, userId);
     res.send(status);
   }
-  const updateSubmission= async (req, res) => {
-    const { submissionId, userId } = req.params;
-    const submissionUpdates = req.body;
-    const status = await dao.updateSubmission(submissionId, submissionUpdates);
-    res.send(status);
-  }
   app.get("/api/courses/:courseId/quizzes/:quizId/submissions/user/:userid", findAllSubmissionsByUser);
   app.post("/api/courses/:courseId/quizzes/:quizId/submissions/user/:userid", createSubmission);
   app.delete("/api/courses/:courseId/quizzes/:quizId/submissions/:submissionId/user/:userid", deleteSubmission);
-  app.put("/api/courses/:courseId/quizzes/:quizId/questions/submissions/:submissionId/user/:userid", updateSubmission);
 }

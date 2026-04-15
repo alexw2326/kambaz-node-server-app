@@ -11,12 +11,8 @@ export default function SubmissionDao() {
   function deleteSubmission(submissionId, userId) {
     return model.deleteOne({ _id: submissionId, userId: userId });
   }
-  function updateSubmission(submissionId, submissionUpdates, userId) {
-    return model.updateOne({ _id: submissionId, userId: userId}, { $set: submissionUpdates });
-  }
   return { findAllSubmissionsByUser, 
     createSubmission,
     deleteSubmission,
-    updateSubmission
   };
 }
